@@ -1,0 +1,47 @@
+/* The url in the following @font-face rules needs to point to the respective Myanmar fonts on the server. */
+/*
+@font-face {
+	font-family: r-PadaukSgaw;
+	src: url(http://eof.eopmissions.org/site/fonts/PadaukSgaw.ttf);
+}
+
+@font-face {
+	font-family: r-Padauk;
+	src: url(http://eof.eopmissions.org/site/fonts/Padauk.ttf);
+}
+*/
+.myUniTest {
+	  font-family: 'Padauk Sgaw', Padauk, r-PadaukSgaw, r-Padauk, 'Padauk Book Sgaw', 'Padauk Book', Ayar, 'Ayar Natdaw', 'Ayar Kasone', 'Ayar Typewriter', 'Ayar Wagaung', 'Ayar Thadingyut', 'Ayar Juno', 'Ayar Takhu', 'Ayar Pyatho', 'Ayar Phatho Pub', 'Ayar Tabaung', 'Ayar Taphtwe', 'Ayar Taphtwe Pub', 'Ayar Tanzaungmone', 'Ayar TawThaLin', 'Ayar Wazo', 'Ayar Nayon', TharLon, Vemana2000, Pothana2000, Code2000, 'GNU Unifont', Parabaik, Myanmar3, 'Masterpiece Uni Sans', Thanlwin, WinuniInnwa, Xenotype, MyMyanmar, Yunghkio, Panglong, "sans-serif";
+	  font-size: 1em; /* don't make it so small that rounding errors give problems */
+	  color: white; /* should be same as background to make it invisible */
+ }
+ .myText {
+	  font-family: 'Padauk Sgaw', Padauk, r-PadaukSgaw, r-Padauk, 'Padauk Book Sgaw', 'Padauk Book', Ayar, 'Ayar Natdaw', 'Ayar Kasone', 'Ayar Typewriter', 'Ayar Wagaung', 'Ayar Thadingyut', 'Ayar Juno', 'Ayar Takhu', 'Ayar Pyatho', 'Ayar Phatho Pub', 'Ayar Tabaung', 'Ayar Taphtwe', 'Ayar Taphtwe Pub', 'Ayar Tanzaungmone', 'Ayar TawThaLin', 'Ayar Wazo', 'Ayar Nayon', TharLon, Vemana2000, Pothana2000, Code2000, 'GNU Unifont', Parabaik, Myanmar3, 'Masterpiece Uni Sans', Thanlwin, WinuniInnwa, Xenotype, MyMyanmar, Yunghkio, Panglong, "sans-serif";
+	  font-size: 1em;
+ }
+
+.myText canvas {
+	position: relative;
+	top: 7px;
+}
+
+.myUnsupportedMessage {
+	background-color:#FFB98B;
+	padding:2px 15px;
+	margin:5px 15px;
+	border-style:dashed;
+	border-width:2px;
+	display:none;
+}
+
+.myUnsupportedMessage .warning {
+	font-style:normal;
+	font-weight:bold;
+	font-size:140%;
+	color:#8E0000;
+}
+
+.myUnsupportedMessage .hideMessageLink {
+	font-size:80%;
+	color:#8E0000;
+}

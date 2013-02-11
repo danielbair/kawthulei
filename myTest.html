@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+<title>Test Myanmar Unicode Support</title>
+<style>
+	/* The url in the following @font-face rules needs to point to the respective Myanmar fonts on the server. */
+	@font-face {
+		font-family: r-PadaukSgaw;
+		src: url(http://eof.eopmissions.org/site/fonts/PadaukSgaw.ttf);
+	}
+
+	@font-face {
+		font-family: r-Padauk;
+		src: url(http://eof.eopmissions.org/site/fonts/Padauk.ttf);
+	}
+
+	.myUniTest {
+        font-family: 'Padauk Sgaw', Padauk, r-PadaukSgaw, r-Padauk, 'Padauk Book Sgaw', 'Padauk Book', Ayar, 'Ayar Natdaw', 'Ayar Kasone', 'Ayar Typewriter', 'Ayar Wagaung', 'Ayar Thadingyut', 'Ayar Juno', 'Ayar Takhu', 'Ayar Pyatho', 'Ayar Phatho Pub', 'Ayar Tabaung', 'Ayar Taphtwe', 'Ayar Taphtwe Pub', 'Ayar Tanzaungmone', 'Ayar TawThaLin', 'Ayar Wazo', 'Ayar Nayon', TharLon, Vemana2000, Pothana2000, Code2000, 'GNU Unifont', Parabaik, Myanmar3, 'Masterpiece Uni Sans', Thanlwin, WinuniInnwa, Xenotype, MyMyanmar, Yunghkio, Panglong, "sans-serif";
+        font-size: 1em; /* don't make it so small that rounding errors give problems */
+        color: white; /* should be same as background to make it invisible */
+    }
+    .myText {
+        font-family: 'Padauk Sgaw', Padauk, r-PadaukSgaw, r-Padauk, 'Padauk Book Sgaw', 'Padauk Book', Ayar, 'Ayar Natdaw', 'Ayar Kasone', 'Ayar Typewriter', 'Ayar Wagaung', 'Ayar Thadingyut', 'Ayar Juno', 'Ayar Takhu', 'Ayar Pyatho', 'Ayar Phatho Pub', 'Ayar Tabaung', 'Ayar Taphtwe', 'Ayar Taphtwe Pub', 'Ayar Tanzaungmone', 'Ayar TawThaLin', 'Ayar Wazo', 'Ayar Nayon', TharLon, Vemana2000, Pothana2000, Code2000, 'GNU Unifont', Parabaik, Myanmar3, 'Masterpiece Uni Sans', Thanlwin, WinuniInnwa, Xenotype, MyMyanmar, Yunghkio, Panglong, "sans-serif";
+        font-size: 1em;
+    }
+
+	.myText canvas {
+		position: relative;
+		top: 7px;
+	}
+
+	.myUnsupportedMessage {
+		background-color:#FFB98B;
+		padding:2px 15px;
+		margin:5px 15px;
+		border-style:dashed;
+		border-width:2px;
+		display:none;
+	}
+
+	.myUnsupportedMessage .warning {
+		font-style:normal;
+		font-weight:bold;
+		font-size:140%;
+		color:#8E0000;
+	}
+
+	.myUnsupportedMessage .hideMessageLink {
+		font-size:80%;
+		color:#8E0000;
+	}
+</style>
+<!-- maybe you understand what this is doing? I don't. I just left it the way it was. -->
+<!--[if IE]>
+<style>vml\: * { behavior:url(#default#VML); display:inline-block }</style>
+<xml:namespace ns="urn:schemas-microsoft-com:vml" prefix="vml" />
+<![endif]-->
+
+<script type="text/javascript" src="./myImageConversion.js"></script>
+</head>
+<body>
+
+<h1>Myanmar Unicode Test
+<span class="myUniTest" id="myTestAWidth1">က္က</span>
+<span class="myUniTest" id="myTestAWidth2">ကက</span>
+<span class="myUniTest" id="myTestBWidth1">က</span>
+<span class="myUniTest" id="myTestBWidth2">ကူ</span>
+<span class="myUniTest" id="myTestC">ကၢ်</span>
+<span class="myUniTest" id="myTestD">ကၣ်</span>
+</h1>
+
+<h1 class="myText">မြ​န်​မာ​စ​ကား</h1>
+<div class="myUnsupportedMessage" id="topUnsupportedMessage"></div>
+
+<p class="myText">စီၤ​သီး​ဖံၤ​လူး​ဧၢ, က​ယဲၢ်​တၢ်​လၢ​ယ့ၣ်​ၡူး​မၤ​ဒီး​သိၣ်​က့ၤ​သီ​က့ၤ​လၢ​အ​ခီၣ်​ထံး​တုၤ​လီၤ​လၢ​မုၢ်​တ​နံၤ​လၢ​အ​မၤ​လိာ်​ပှၤ​တၢ်​မၢ​ဖိ​လၢ​အ​ဃု​ထၢ​ဝဲ​တ​ဖၣ်, လၢ​သး​စီ​ဆှံ, ဒီး​ဘၣ်​တၢ်​စိာ်​ထီၣ်​အီၤ​န့ၣ်, ဒီး​အ​ဝဲ​ဒၣ်​ဒုး​နဲၣ်​အ​သး​လၢ​အီၤ​လၢ​အ​မူ​ဒံး​လၢ​အ​ဒိး​တၢ်​အ​လီၢ်​ခံ, လၢ​တၢ်​အုၣ်​အ​သး​အါ​မံၤ​လၢ​ပ​သး​ဒ့​ဒီ​တ​သ့​ဘၣ်, ဒီး​အိၣ်​ဖျါ​ထီၣ်​လၢ​အီၤ​အ​နံၤ​လွံၢ်​ဆံ​ညါ, ဒီး​က​တိၤ​တၢ်​ဘၣ်​ဃး​ဒီး​ယွၤ​အ​ဘီ​အ​မုၢ်​လီၤ. ဒီး​အ​ဝဲ​သ့ၣ်​အိၣ်​ဖှိၣ်​ရိ​ဖှိၣ်​ဒီး​အီၤ, ဒီး​အ​ဝဲ​ဒၣ်​မၤ​လိာ်​အီၤ​ဒ်​သိး​အ​သု​တ​ဟး​ထီၣ်​လၢ​ယ​ရူၤ​ၡ​လ့ၣ်​တ​ဂ့ၤ. မ့​မ့ၢ်​လၢ​အ​က​ဆူ​လၢ်​ဟူ​ပၢ်​အ​တၢ်​စံး​ပာ်, လၢ​သု​နၢ်​ဟူ​တ့ၢ်​လၢ​ယၤ​လီၤ. အ​ဂ့ၢ်​ဒ်​အံၤ, စီၤ​ယိၤ​ဟၣ်​ဘျၢ​တၢ်​လၢ​ထံ​ကျါ, မ့​မ့ၢ်​ဆူ​ညါ​တ​အါ​နံၤ​အါ​သီ​ဘၣ်​ဒီး, သု​က​ဒိး​ဘျၢ​သု​သး​လၢ​သး​စီ​ဆှံ​အ​ပူၤ​လီၤ.
+</p>
+
+<p class="myText">စီၤ​သီး​ဖံၤ​လူး​ဧၢ, က​ယဲၢ်​တၢ်​လၢ​ယ့ၣ်​ၡူး​မၤ​ဒီး​သိၣ်​က့ၤ​သီ​က့ၤ​လၢ​အ​ခီၣ်​ထံး​တုၤ​လီၤ​လၢ​မုၢ်​တ​နံၤ​လၢ​အ​မၤ​လိာ်​ပှၤ​တၢ်​မၢ​ဖိ​လၢ​အ​ဃု​ထၢ​ဝဲ​တ​ဖၣ်, လၢ​သး​စီ​ဆှံ, ဒီး​ဘၣ်​တၢ်​စိာ်​ထီၣ်​အီၤ​န့ၣ်, ဒီး​အ​ဝဲ​ဒၣ်​ဒုး​နဲၣ်​အ​သး​လၢ​အီၤ​လၢ​အ​မူ​ဒံး​လၢ​အ​ဒိး​တၢ်​အ​လီၢ်​ခံ, လၢ​တၢ်​အုၣ်​အ​သး​အါ​မံၤ​လၢ​ပ​သး​ဒ့​ဒီ​တ​သ့​ဘၣ်, ဒီး​အိၣ်​ဖျါ​ထီၣ်​လၢ​အီၤ​အ​နံၤ​လွံၢ်​ဆံ​ညါ, ဒီး​က​တိၤ​တၢ်​ဘၣ်​ဃး​ဒီး​ယွၤ​အ​ဘီ​အ​မုၢ်​လီၤ. ဒီး​အ​ဝဲ​သ့ၣ်​အိၣ်​ဖှိၣ်​ရိ​ဖှိၣ်​ဒီး​အီၤ, ဒီး​အ​ဝဲ​ဒၣ်​မၤ​လိာ်​အီၤ​ဒ်​သိး​အ​သု​တ​ဟး​ထီၣ်​လၢ​ယ​ရူၤ​ၡ​လ့ၣ်​တ​ဂ့ၤ. မ့​မ့ၢ်​လၢ​အ​က​ဆူ​လၢ်​ဟူ​ပၢ်​အ​တၢ်​စံး​ပာ်, လၢ​သု​နၢ်​ဟူ​တ့ၢ်​လၢ​ယၤ​လီၤ. အ​ဂ့ၢ်​ဒ်​အံၤ, စီၤ​ယိၤ​ဟၣ်​ဘျၢ​တၢ်​လၢ​ထံ​ကျါ, မ့​မ့ၢ်​ဆူ​ညါ​တ​အါ​နံၤ​အါ​သီ​ဘၣ်​ဒီး, သု​က​ဒိး​ဘျၢ​သု​သး​လၢ​သး​စီ​ဆှံ​အ​ပူၤ​လီၤ.
+</p>
+
+
+<div class="myUnsupportedMessage" id="bottomUnsupportedMessage"></div>
+
+<script type="text/javascript">	
+var myUnicode = new TlsMyUnicode();
+setTimeout(function(){myUnicode.main('./')},100)
+</script>
+</body>
+</html>
+
+
