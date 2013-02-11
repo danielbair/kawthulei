@@ -14,7 +14,7 @@ License: GPL
  * related to Myanmar language and characters
  **********************************************************************/
 
-class MyRefClass {
+class hkp_MyRefClass {
 	public $langugeCodes = array( // All language codes that could potentially use the Myanmar script. Note: some frequently use other scripts to write as well (such as Thai, Latin, etc.)
 		'my',	// ISO 639-1
 		'bur',	//	ISO 639-2
@@ -110,24 +110,24 @@ class MyRefClass {
 	}
 };
 
-$myref = new MyRefClass();
+$hkp_myref = new hkp_MyRefClass();
 
 /***********************************************************************
  * CSS and JS
  **********************************************************************/
-add_action( 'wp_enqueue_scripts', 'addMyStyleSheets', 100 ); // What is the 100 for?
+add_action( 'wp_enqueue_scripts', 'addMyStyleSheets', 100 );
 function addMyStyleSheets() {
-	global $myref;
+	global $hkp_myref;
 	wp_register_style( 'myStyles', plugins_url('css/myStyles.css', __FILE__) );
 	wp_enqueue_style( 'myStyles' );
 
-	if ( $myref->languageIsMyanmar() ) {
+	if ( $hkp_myref->languageIsMyanmar() ) {
 	   wp_register_script('myImageConversion', plugins_url('/js/myImageConversion.js', __FILE__) );
 	   wp_enqueue_script( 'myImageConversion' );
 	}
 }
 
-if ( get_current_theme() == 'CyberChimps Pro Starter Theme' ) {
+if ( wp_get_theme() == 'CyberChimps Pro Starter Theme' ) {
 	add_action( 'cyberchimps_header', 'addNoScript', 1 );
 } else {
 	add_action( 'wp_head', 'addNoScript', 100 );
@@ -144,8 +144,8 @@ function addNoScript() { // this is added inside the head html tags... (codex.wo
 
 add_action( 'wp_footer' , 'addMyJavascripts', 1 );
 function addMyJavascripts() {
-	global $myref;
-	if ( $myref->languageIsMyanmar() ) {
+	global $hkp_myref;
+	if ( $hkp_myref->languageIsMyanmar() ) {
 	  echo '<div id="myUniTest" style="display: none;">'."\n"
 	     . '   <span class="myUniTest" id="myTestAWidth1">က္က</span>'."\n"
 	     . '   <span class="myUniTest" id="myTestAWidth2">ကက</span>'."\n"
@@ -259,17 +259,17 @@ add_filter( 'widget_title', 'addMyTextClassSpans');
  * Callback Functions
  **********************************************************************/
 function addMyTextClassSpans($content) {
-	global $myref;
+	global $hkp_myref;
 	
 	$inTag = false; $inMyanmarRun = false; $outputText = ''; $lastChar = '';
 	$inputTextArray = preg_split("//u", $content, -1, PREG_SPLIT_NO_EMPTY); // this splits it up into an array of characters. someone helped me with it on a forum. anything else runs into unicode encoding issues making it so that unicode characters can't be compared ('က' == 'က' would be false)
 	foreach($inputTextArray as $char) {
 		if ( (!$inTag and $lastChar == '<' and ctype_alnum($char)) or ($inTag and $char == '>') )
 			$inTag = !$inTag;
-		if (!$inTag and !$inMyanmarRun and $myref->isMyanmarCharacter($char)) {
+		if (!$inTag and !$inMyanmarRun and $hkp_myref->isMyanmarCharacter($char)) {
 			$outputText .= "<span class='myText'>" . $char;
  			$inMyanmarRun = true;
-		} elseif ($inMyanmarRun and !$myref->isMyanmarPhraseCharacter($char)) {
+		} elseif ($inMyanmarRun and !$hkp_myref->isMyanmarPhraseCharacter($char)) {
 			$outputText .= "</span>" . $char;
  			$inMyanmarRun = false;
 		} else
@@ -281,21 +281,23 @@ function addMyTextClassSpans($content) {
 }
 
 function strip200B($content) { // use this function to clean things up
-	$myref = new MyRefClass();
-	$content = str_replace( $myref->getLineBreakChar() , '' , $content );
+	global $hkp_myref;
+	$content = str_replace( $hkp_myref->getLineBreakChar() , '' , $content );
 	return $content;
 }
 
 function insert200B( $inputText ) {
-	global $myref;
+	global $hkp_myref;
+
 	
+
 	$outputText = ''; $lastChar = '';
 	$inputTextArray = preg_split("//u", strip200B($inputText), -1, PREG_SPLIT_NO_EMPTY);
 	foreach($inputTextArray as $char) {
-		if ($myref->isKarenConsonant($char) and ($myref->isMyanmarCharacter($lastChar) or $myref->isOpeningParentheses($lastChar)))
-			$outputText .= $myref->getLineBreakChar() . $char;
-		else if ($myref->isOpeningParentheses($lastChar) and $myref->isMyanmarCharacter($lastChar) )
-			$outputText .= $myref->getLineBreakChar() . $char;
+		if ($hkp_myref->isKarenConsonant($char) and ($hkp_myref->isMyanmarCharacter($lastChar) or $hkp_myref->isOpeningParentheses($lastChar)))
+			$outputText .= $hkp_myref->getLineBreakChar() . $char;
+		else if ($hkp_myref->isOpeningParentheses($lastChar) and $hkp_myref->isMyanmarCharacter($lastChar) )
+			$outputText .= $hkp_myref->getLineBreakChar() . $char;
 		else
 			$outputText .= $char;
 		$lastChar = $char;
