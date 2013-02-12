@@ -13,11 +13,28 @@ var myCommon = {
     }
 };
 
-var requirementsList = "<ol>  <li>You need a modern graphite enabled browser, such as Firefox. Firefox is available from <a href='http://www.mozilla.org/'>www.mozilla.org</a>.</li>  <li>For best results, you should enable graphite font rendering on firefox. Directions are available <a href='http://scripts.sil.org/cms/scripts/page.php?site_id=projects&item_id=graphite_firefox'>here</a>.  <li>You also need Unicode 6.0 compliant Myanmar fonts.</li>  <ul>   <li>The Padauk Myanmar font is available free of charge on the <a href='http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=Padauk'>SIL International Website</a>. Simply download the Padauk file, unzip the files, and install in your fonts folder.</li>   <li>A version of the Padauk font stylized for Sgaw Karen is also freely available <a href='http://www.openroad.net.au/languages/seasian/sgawkaren/'>here</a>. Download the PadaukSgaw file, unzip the files, and install in your fonts folder.</li>  </ul>  </ol>"
+var requirementsList = '';
+requirementsList += 	"<ol>";
+requirementsList += 	"	<li>You need a modern graphite enabled browser, such as Firefox. Firefox is available from <a href='http://www.mozilla.org/'>www.mozilla.org</a>.</li>";
+requirementsList +=	"	<li>For best results, you should enable graphite font rendering on firefox. Directions are available <a href='http://scripts.sil.org/cms/scripts/page.php?site_id=projects&item_id=graphite_firefox'>here</a>.  <li>You also need Unicode 6.0 compliant Myanmar fonts.</li>";
+requirementsList +=	"	<ul>";
+requirementsList +=	"		<li>The Padauk Myanmar font is available free of charge on the <a href='http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=Padauk'>SIL International Website</a>. Simply download the Padauk file, unzip the files, and install in your fonts folder.</li>";
+requirementsList +=	"		<li>A version of the Padauk font stylized for Sgaw Karen is also freely available <a href='http://www.openroad.net.au/languages/seasian/sgawkaren/'>here</a>. Download the PadaukSgaw file, unzip the files, and install in your fonts folder.</li>";
+requirementsList +=	"	</ul>";
+requirementsList +=	"</ol>";
 
-var topUnsupportedMessage = "<p><em class='warning'>Warning!</em><br>Your setup does not support Karen text. You will not be able to read Karen text on this page.</p>" + requirementsList + "<p><a class='hideMessageLink' href=\"javascript:{myUnicode.hide(document.getElementById('topUnsupportedMessage')); }\">Hide this message.</a></p>"
+var topUnsupportedMessage = '';
+topUnsupportedMessage +=	"<p><em class='warning'>Warning!</em>";
+topUnsupportedMessage +=	"<br />Your setup does not support Karen text. You will not be able to read Karen text on this page.</p>";
+topUnsupportedMessage +=	requirementsList;
+topUnsupportedMessage +=	"<p><a class='hideMessageLink' href=\"javascript:{myUnicode.hide(document.getElementById('topUnsupportedMessage')); }\">Hide this message.</a></p>";
 
-var bottomUnsupportedMessage = "<p><em class='warning'>Warning!</em><br>Your setup does not support Karen text. Scripts have attempted to convert the Karen Unicode text information on this page to images; however, for best results, you should consider upgrading your system.</p>" + requirementsList + "<p><a class='hideMessageLink' href=\"javascript:{myUnicode.hide(document.getElementById('bottomUnsupportedMessage')); }\">Hide this message.</a></p>"
+var bottomUnsupportedMessage = '';
+bottomUnsupportedMessage +=	"<p><em class='warning'>Warning!</em>";
+bottomUnsupportedMessage +=	"<br />Your setup does not support Karen text. Scripts have attempted to convert the Karen Unicode text information on this page to images; however, for best results, you should consider upgrading your system.";
+bottomUnsupportedMessage +=	"</p>";
+bottomUnsupportedMessage +=	requirementsList;
+bottomUnsupportedMessage +=	"<p><a class='hideMessageLink' href=\"javascript:{myUnicode.hide(document.getElementById('bottomUnsupportedMessage')); }\">Hide this message.</a></p>";
 
 function MyNodeParser(node) {
     this.node = node;
@@ -315,7 +332,7 @@ TlsMyUnicode.prototype.parseText = function(node, text) {
                             else if (node.parentNode.style.color.specified)
                                 textColor = node.parentNode.style.color;
 
-                            var fontSize = this.canvasFont.nodeFontSize(node.parentNode) * 1;
+                            var fontSize = this.canvasFont.nodeFontSize(node.parentNode);
                             TlsDebug().print("fontsize:" + fontSize + " computed:" +
                                 computedStyle.fontSize);
                             if (this.canvasFont.appendText(docFrag, fontSize, text.substring(i,j), textColor, undefined))//(this.isIe)?backColor:undefined
@@ -440,29 +457,27 @@ TlsMyUnicode.prototype.myUnicodeCheck = function() {
 
 TlsMyUnicode.prototype.show = function(element) {
    if (!document.getElementById || element == null)
-      return
-   element.style.display="block"
+      return;
+   element.style.display="block";
 };
 
 TlsMyUnicode.prototype.hide = function(element) {
    if (!document.getElementById || element == null)
-      return
-   element.style.display="none"
+      return;
+   element.style.display="none";
 };
 
 TlsMyUnicode.prototype.main = function(scriptsDir) {
    this.show(document.getElementById('myUniTest'));
    if (!this.myUnicodeCheck()) {
-      this.hide(document.getElementById('myUniTest'));
       this.initParse(scriptsDir);
-      if (this.isIe || this.isKonqueror) {
-			document.getElementById('topUnsupportedMessage').innerHTML = topUnsupportedMessage
+      if (this.isIe) {
+			document.getElementById('topUnsupportedMessage').innerHTML = topUnsupportedMessage;
 			this.show(document.getElementById('topUnsupportedMessage'));
       } else {
-			document.getElementById('bottomUnsupportedMessage').innerHTML = bottomUnsupportedMessage
+			document.getElementById('bottomUnsupportedMessage').innerHTML = bottomUnsupportedMessage;
 			this.show(document.getElementById('bottomUnsupportedMessage'));
       }
-   } else {
-      this.hide(document.getElementById('myUniTest'));
    }
+	this.hide(document.getElementById('myUniTest'));
 };
